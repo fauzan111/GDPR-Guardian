@@ -1,17 +1,17 @@
 version: '3.8'
 
 services:
-  # -------------------- 1. The Backend API Service (Fix is here) --------------------
+  # Backend API Service 
   api:
     container_name: gdpr_api_backend
     build: .
     ports:
       - "8000:80" 
-    # **CRITICAL FIX: Explicitly run Uvicorn for the main API module**
+    # Uvicorn for the main API module
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
     restart: always
 
-  # -------------------- 2. The Frontend Streamlit Service --------------------
+  # Frontend Streamlit 
   frontend:
     container_name: gdpr_frontend_streamlit
     build:
