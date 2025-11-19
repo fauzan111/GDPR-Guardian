@@ -8,7 +8,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# --- Data Models (Pydantic) ---
+# Data Models
 class AnonymizeRequest(BaseModel):
     text: str = Field(..., example="Il mio Codice Fiscale è RSSMRA80A01H501U.")
     language: str = Field("it", example="it")
@@ -17,7 +17,7 @@ class AnonymizeResponse(BaseModel):
     original_text: str
     anonymized_text: str
 
-# --- Endpoints ---
+# Endpoints 
 @app.get("/")
 def root():
     return {"message": "GDPR Guardian is running. Send POST requests to /anonymize"}
@@ -32,5 +32,3 @@ def redact_pii(request: AnonymizeRequest):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-# To run locally: uvicorn app.main:app --reload
